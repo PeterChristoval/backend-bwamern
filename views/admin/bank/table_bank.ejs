@@ -1,0 +1,43 @@
+<!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary px-4 py-2" data-toggle="modal" data-target="#add-modal">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Bank</th>
+                                            <th>Nomor Rekening</th>
+                                            <th>Nama</th>
+                                            <th>Image</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (let i = 0; i < bank.length; i++) { %>
+                                            <tr>
+                                                <td><%= i+1 %></td>
+                                                <td><%= bank[i].nameBank.toUpperCase() %></td>
+                                                <td><%= bank[i].nomorRekening %></td>
+                                                <td><%= bank[i].name %></td>
+                                                <td><img src="http://localhost:3000/<%= bank[i].imageUrl %>" alt="" height="70px" width="100px"></td>
+                                                <td>
+                                                    <!-- Button trigger modal -->
+                                                    <a href="javascript:void(0)" type="button" class="btn btn-warning btn-circle btn-update" data-toggle="modal" data-target="#update-modal" data-id="<%= bank[i].id %>" data-name="<%= bank[i].name %>" data-namebank="<%= bank[i].nameBank %>" data-nomorrekening="<%= bank[i].nomorRekening %>">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <button type="submit" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></button>
+                                                </td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
