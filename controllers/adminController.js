@@ -1,5 +1,7 @@
 const Category = require('../models/Category')
 const Bank = require('../models/Bank')
+const Item = require('../models/Item')
+const Image = require('../models/Image')
 const fs = require('fs-extra')
 const path = require('path')
 
@@ -85,11 +87,11 @@ module.exports = {
                 name,
                 imageUrl: `images/${req.file.filename}`
             })
-            req.flash('alertMessage', 'Berhasil menambahkan bank')
+            req.flash('alertMessage', 'Berhasil menambahkan data bank')
             req.flash('alertStatus', 'success')
             res.redirect('/admin/bank')
         } catch (error) {
-            req.flash('alertMessage', 'Gagal menambahkan bank')
+            req.flash('alertMessage', 'Gagal menambahkan data bank')
             req.flash('alertStatus', 'danger')
             res.redirect('/admin/bank')
         }
@@ -105,7 +107,7 @@ module.exports = {
                 bank.nomorRekening = nomorRekening
                 bank.name = name
                 await bank.save()
-                req.flash('alertMessage', 'Berhasil update bank')
+                req.flash('alertMessage', 'Berhasil update data bank')
                 req.flash('alertStatus', 'success')
                 res.redirect('/admin/bank')
             } else {
@@ -114,8 +116,8 @@ module.exports = {
                 bank.nomorRekening = nomorRekening
                 bank.name = name
                 bank.imageUrl = `images/${req.file.filename}`
-                await Bank.save()
-                req.flash('alertMessage', 'Berhasil update bank')
+                await bank.save()
+                req.flash('alertMessage', 'Berhasil update data bank')
                 req.flash('alertStatus', 'success')
                 res.redirect('/admin/bank')
             }
@@ -126,8 +128,68 @@ module.exports = {
         }
     },
 
-    viewItem: (req, res) => {
-        res.render('admin/item/view_item')
+    deleteBank: async (req, res) => {
+        try {
+            const { id } = req.params
+            const bank = await Bank.findOne({ _id: id })
+            await bank.remove()
+            req.flash('alertMessage', 'Berhasil menghapus data bank')
+            req.flash('alertStatus', 'success')
+            res.redirect('/admin/bank')
+        } catch (error) {
+            req.flash('alertMessage', 'Gagal menghapus data bank')
+            req.flash('alertStatus', 'danger')
+            res.redirect('/admin/bank')
+        }
+    },
+
+    viewItem: async (req, res) => {
+        try {
+            const category =  await Category.find()
+            const message = req.flash('alertMessage')
+            const status = req.flash('alertStatus')
+            const alert = { message: message, status: status }
+            res.render('admin/item/view_item', {
+                title: 'Staycation | Item',
+                category,
+                alert
+            })
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`)
+            req.flash('alertStatus', 'danger')
+            res.redirect('/admin/item')
+        }
+    },
+
+    addItem: async (req, res) => {
+        try {
+            const {categoryId, price, title, city, about} = req.body
+            if (req.files.length > 0) {
+                const category = await Category.findOne({_id: categoryId})
+                const newItem = {
+                    categoryId : category._id,
+                    title,
+                    description: about,
+                    price,
+                    city
+                }
+                const item = await Item.create(newItem)
+                category.itemId.push({_id: item._id})
+                await category.save()
+                for (let i = 0; i < req.files.length; i++) {
+                    const imageSave = await image.create({imageUrl: `images/${req.files.filename}`})
+                    item.imageId.push({_id: imageSave._id})
+                    await item.save()
+                }
+                req.flash('alertMessage', 'Berhasil add item')
+                req.flash('alertStatus', 'success')
+                res.redirect('/admin/item')
+            }
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`)
+            req.flash('alertStatus', 'danger')
+            res.redirect('/admin/item')
+        }
     },
 
     viewBooking: (req, res) => {

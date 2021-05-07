@@ -19,7 +19,22 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Item</h1>
 
-                    <%- include('table_item.ejs') %>
+                    <% if(alert.message != "") { %>
+                        <div class="alert alert-<%= alert.status %>" role="alert">
+                            <%= alert.message %>
+                        </div>
+                    <% } %>
+
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#show-item" role="tab" aria-controls="nav-home" aria-selected="true">Show Item</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#add-item" role="tab" aria-controls="nav-profile" aria-selected="false">Add Item</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <%- include('show_table_item.ejs') %> 
+                        <%- include('add_item.ejs') %> 
+                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -61,3 +76,6 @@
     </div>
 
 <%- include('../../partials/js.ejs') %>
+<script>
+    CKEDITOR.replace( 'about' );
+</script>

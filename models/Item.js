@@ -1,9 +1,8 @@
 const mongoose = require('mongoose')
 
-const { Schema } = mongoose
-const {ObjectId} = mongoose.Schema
+const { ObjectId } = mongoose.Schema
 
-const itemSchema = new Schema({
+const itemSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -22,10 +21,15 @@ const itemSchema = new Schema({
     },
     isPopular: {
         type: Boolean,
+        default: false
     },
     description: {
         type: String,
         required: true
+    },
+    CategoryId: {
+        type: ObjectId,
+        ref: 'Category'
     },
     imageId: [{
         type: ObjectId,
