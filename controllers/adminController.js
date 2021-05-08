@@ -98,7 +98,6 @@ module.exports = {
     },
 
     updateBank: async (req, res) => {
-        console.log(req.file);
         try {
             const { nameBank, nomorRekening, name, id } = req.body
             const bank = await Bank.findOne({ _id: id })
@@ -163,25 +162,25 @@ module.exports = {
 
     addItem: async (req, res) => {
         try {
-            const {categoryId, price, title, city, about} = req.body
+            const { categoryId, title, price, city, about } = req.body
             if (req.files.length > 0) {
-                const category = await Category.findOne({_id: categoryId})
+                const category = await Category.findOne({ _id: categoryId })
                 const newItem = {
-                    categoryId : category._id,
+                    categoryId: category._id,
                     title,
                     description: about,
                     price,
                     city
                 }
                 const item = await Item.create(newItem)
-                category.itemId.push({_id: item._id})
+                category.itemId.push({ _id: item._id })
                 await category.save()
                 for (let i = 0; i < req.files.length; i++) {
-                    const imageSave = await image.create({imageUrl: `images/${req.files.filename}`})
-                    item.imageId.push({_id: imageSave._id})
+                    const imageSave = await Image.create({ imageUrl: `images/${req.files[i].filename}` });
+                    item.imageId.push({ _id: imageSave._id })
                     await item.save()
                 }
-                req.flash('alertMessage', 'Berhasil add item')
+                req.flash('alertMessage', 'Success Add Item')
                 req.flash('alertStatus', 'success')
                 res.redirect('/admin/item')
             }
