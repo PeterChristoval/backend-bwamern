@@ -1,6 +1,5 @@
-const mongoose = require('mongoose')
-
-const { ObjectId } = mongoose.Schema
+const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema;
 
 const featureSchema = new mongoose.Schema({
     name: {

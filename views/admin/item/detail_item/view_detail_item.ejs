@@ -1,9 +1,9 @@
-<%- include('../../partials/header.ejs') %>
+<%- include('../../../partials/header.ejs') %>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-<%- include('../../partials/sidebar.ejs') %>
+<%- include('../../../partials/sidebar.ejs') %>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -11,13 +11,13 @@
             <!-- Main Content -->
             <div id="content">
 
-<%- include('../../partials/navbar.ejs') %>
+<%- include('../../../partials/navbar.ejs') %>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Item</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Detail Item</h1>
 
                     <% if(alert.message != "") { %>
                         <div class="alert alert-<%= alert.status %>" role="alert">
@@ -25,36 +25,16 @@
                         </div>
                     <% } %>
 
-                    <% if (action == 'view') { %>
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#show-item" role="tab" aria-controls="nav-home" aria-selected="true">Show Item</a>
-                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#add-item" role="tab" aria-controls="nav-profile" aria-selected="false">Add Item</a>
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#show-feature" role="tab" aria-controls="nav-home" aria-selected="true">Show Feature</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#show-activity" role="tab" aria-controls="nav-profile" aria-selected="false">Show Activity</a>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
-                            <%- include('show_table_item.ejs') %> 
-                            <%- include('add_item.ejs') %> 
+                            <%- include('show_feature.ejs') %>
+                            <%- include('show_activity.ejs') %>
                         </div>
-                    <% } else if (action == 'show image') { %>
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#show-image" role="tab" aria-controls="nav-home" aria-selected="true">Show Image</a>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <%- include('show_image_item.ejs') %> 
-                        </div>
-                    <% } else { %>
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#edit-item" role="tab" aria-controls="nav-home" aria-selected="true">Edit Item</a>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <%- include('edit_item.ejs') %> 
-                        </div>
-                        <% } %>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -62,7 +42,7 @@
             </div>
             <!-- End of Main Content -->
 
-<%- include('../../partials/footer.ejs') %>
+<%- include('../../../partials/footer.ejs') %>
 
         </div>
         <!-- End of Content Wrapper -->
@@ -95,7 +75,33 @@
         </div>
     </div>
 
-<%- include('../../partials/js.ejs') %>
+<%- include('show_modal_activity.ejs') %>
+<%- include('show_modal_feature.ejs') %>
+<%- include('../../../partials/js.ejs') %>
 <script>
+    $(document).ready(function() {
+        $('#dataTableActivity').DataTable()
+    })
     CKEDITOR.replace( 'about' );
+
+    $('#dataTable').on('click', '.btn-update', function() {
+        let id = $(this).data('id')
+        let qty = $(this).data('qty')
+        let name = $(this).data('name')
+        $('#update-modal').modal('show')
+        $('.id').val(id)
+        $('.qty').val(qty)
+        $('.name').val(name)
+    })
+    
+
+    $('#dataTableActivity').on('click', '.btn-update', function() {
+        let id = $(this).data('id')
+        let type = $(this).data('type')
+        let name = $(this).data('name')
+        $('#update-modal').modal('show')
+        $('.id').val(id)
+        $('.type').val(type)
+        $('.name').val(name)
+    })
 </script>
