@@ -43,7 +43,7 @@
                                         <td>
                                             <!-- Button trigger modal -->
                                             <form action="/admin/item/<%= itemId %>/activity/<%= activity[i].id %>?_method=DELETE" method="POST">
-                                                <a href="javascript:void(0)" type="button" class="btn btn-warning btn-circle btn-update" data-toggle="modal" data-target="#update-modal" data-id="<%= activity[i].id %>" data-name="<%= activity[i].name %>" data-type="<%= activity[i].type %>">
+                                                <a href="javascript:void(0)" type="button" class="btn btn-warning btn-circle btn-update" data-id="<%= activity[i].id %>" data-name="<%= activity[i].name %>" data-type="<%= activity[i].type %>">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <button type="submit" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></button>

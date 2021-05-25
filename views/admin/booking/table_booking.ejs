@@ -12,11 +12,29 @@
                                             <th>Date</th>
                                             <th>Title</th>
                                             <th>Name Member</th>
-                                            <th>Name Bank</th>
+                                            <th>Name booking</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        <% for (let i = 0; i < booking.length; i++) { %>
+                                            <tr>
+                                                <td><%= i+1 %></td>
+                                                <td><%= booking[i].bookingStartDate.toLocaleString().split(',')[0] %> s/d <%= booking[i].bookingEndDate.toLocaleString().split(',')[0] %></td>
+                                                <td><img src="http://localhost:3000/<%= booking[i].imageUrl %>" alt="" width="100px"></td>
+                                                <td>
+                                                    <!-- Button trigger modal -->
+                                                    <form action="/admin/booking/<%= booking[i].id %>?_method=DELETE" method="POST">
+                                                        <a href="javascript:void(0)" type="button" class="btn btn-warning btn-circle btn-update" data-toggle="modal" data-target="#update-modal" data-id="<%= booking[i].id %>" data-name="<%= booking[i].name %>" data-namebooking="<%= booking[i].namebooking %>" data-nomorrekening="<%= booking[i].nomorRekening %>">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button type="submit" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

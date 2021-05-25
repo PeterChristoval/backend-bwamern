@@ -85,22 +85,18 @@
     CKEDITOR.replace( 'about' );
 
     $('#dataTable').on('click', '.btn-update', function() {
-        let id = $(this).data('id')
         let qty = $(this).data('qty')
         let name = $(this).data('name')
         $('#update-modal').modal('show')
-        $('.id').val(id)
         $('.qty').val(qty)
         $('.name').val(name)
     })
     
 
     $('#dataTableActivity').on('click', '.btn-update', function() {
-        let id = $(this).data('id')
         let type = $(this).data('type')
         let name = $(this).data('name')
         $('#update-modal').modal('show')
-        $('.id').val(id)
         $('.type').val(type)
         $('.name').val(name)
     })
