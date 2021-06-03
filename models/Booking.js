@@ -16,14 +16,14 @@ const BookingSchema = new Schema({
         type: String,
         required: true
     },
-    itemId: [{
+    itemId: {
         _id: {
             type: ObjectId,
             ref: 'Item',
             required: true
         },
         title: {
-            type: Number,
+            type: String,
             required: true
         },
         price: {
@@ -34,15 +34,15 @@ const BookingSchema = new Schema({
             type: Number,
             required: true
         },
-        total: {
-            type: Number,
-            required: true
-        }
-    }],
-    memberId: [{
+    },
+    total: {
+        type: Number,
+        required: true
+    },
+    memberId: {
         type: ObjectId,
         ref: 'Member'
-    }],
+    },
     bankId: {
         type: ObjectId,
         ref: 'Bank'
@@ -62,7 +62,7 @@ const BookingSchema = new Schema({
         },
         status: {
             type: String,
-            required: true
+            default: 'Proses'
         },
     }
 })

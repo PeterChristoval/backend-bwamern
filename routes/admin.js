@@ -30,5 +30,8 @@ router.post('/item/add/activity', upload, adminController.addActivity)
 router.put('/item/update/activity', upload, adminController.updateActivity)
 router.delete('/item/:itemId/activity/:id', adminController.deleteActivity)
 router.get('/booking', adminController.viewBooking)
+router.get('/booking/:id', adminController.showDetailBooking)
+router.put('/booking/:id/confirmation', adminController.actionConfirmation)
+router.put('/booking/:id/reject', adminController.actionReject)
 
 module.exports = router

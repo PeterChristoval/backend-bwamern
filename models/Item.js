@@ -28,6 +28,10 @@ const itemSchema = new mongoose.Schema({
     },
     unit: {
         type: String,
+        Default: 'night'
+    },
+    unit: {
+        type: String,
         default: 'night'
     },
     sumBooking: {
