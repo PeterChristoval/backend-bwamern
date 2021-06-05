@@ -26,7 +26,7 @@
                                                 <td><%= bank[i].nameBank.toUpperCase() %></td>
                                                 <td><%= bank[i].nomorRekening %></td>
                                                 <td><%= bank[i].name %></td>
-                                                <td><img src="http://localhost:3000/<%= bank[i].imageUrl %>" alt="" width="100px"></td>
+                                                <td><img src="https://staycation-adminapp.herokuapp.com/<%= bank[i].imageUrl %>" alt="" width="100px"></td>
                                                 <td>
                                                     <!-- Button trigger modal -->
                                                     <form action="/admin/bank/<%= bank[i].id %>?_method=DELETE" method="POST">

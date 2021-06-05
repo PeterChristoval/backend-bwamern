@@ -39,7 +39,7 @@
                                         <td><%= i+1 %></td>
                                         <td><%= feature[i].name%></td>
                                         <td><%= feature[i].qty %></td>
-                                        <td><img src="http://localhost:3000/<%= feature[i].imageUrl %>" alt="" width="100px"></td>
+                                        <td><img src="https://staycation-adminapp.herokuapp.com/<%= feature[i].imageUrl %>" alt="" width="100px"></td>
                                         <td>
                                             <!-- Button trigger modal -->
                                             <form action="/admin/item/<%= itemId %>/feature/<%= feature[i].id %>?_method=DELETE" method="POST">
